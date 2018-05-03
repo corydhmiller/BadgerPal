@@ -1,18 +1,17 @@
 <template>
   <div class="login">
-    <h3>Sign In</h3>
+    <h3>Create Your Account</h3>
     <input type="text" placeholder="Email" />
     <br />
     <input type="password" placeholder="Password" />
     <br />
-    <button>Login &raquo;</button>
-    <p>Don't have an account yet? <router-link to="/register">Create an account</router-link></p>
+    <button>Sign Up &raquo;</button>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'login',
+    name: 'Register',
     data () {
       return {
       }
@@ -21,11 +20,12 @@
 
 </script>
 
-<style lang="scss" scoped>
+<style scoped lang="scss">
 
-.login {
+.signup {
   text-align:center;
 }
+
 input {
   padding: 1rem;
   margin: 1rem;
