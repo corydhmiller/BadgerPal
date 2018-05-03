@@ -4,10 +4,11 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import firebase from 'firebase'
+import firebaseConfig from './assets/firebaseConfig'
 
 Vue.config.productionTip = false
 
-var config = {
+const config = {
   apiKey: "AIzaSyDsthJVQd-UEJSvrLh8PCtTZwKmi2KsOdI",
   authDomain: "badgerpal-87635.firebaseapp.com",
   databaseURL: "https://badgerpal-87635.firebaseio.com",
@@ -16,7 +17,7 @@ var config = {
   messagingSenderId: "479067404949"
 }
 
-firebase.initializeApp(config);
+firebase.initializeApp(firebaseConfig);
 
 /* eslint-disable no-new */
 new Vue({
