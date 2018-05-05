@@ -8,21 +8,17 @@ import firebaseConfig from './assets/firebaseConfig'
 
 Vue.config.productionTip = false
 
-const config = {
-  apiKey: "AIzaSyDsthJVQd-UEJSvrLh8PCtTZwKmi2KsOdI",
-  authDomain: "badgerpal-87635.firebaseapp.com",
-  databaseURL: "https://badgerpal-87635.firebaseio.com",
-  projectId: "badgerpal-87635",
-  storageBucket: "badgerpal-87635.appspot.com",
-  messagingSenderId: "479067404949"
-}
-
+let app;
 firebase.initializeApp(firebaseConfig);
-
-/* eslint-disable no-new */
-new Vue({
-  el: '#app',
-  router,
-  components: { App },
-  template: '<App/>'
+firebase.auth().onAuthStateChanged(() => {
+  if (!app) {
+    app = new Vue({
+      el: '#app',
+      router,
+      components: {
+        App
+      },
+      template: '<App/>'
+    })
+  }
 })
