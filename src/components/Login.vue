@@ -30,7 +30,7 @@
       submitLogin() {
         firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(() => {
           this.setMessageContent('You have successfully logged in.')
-          this.$router.replace('hello')
+          this.$router.replace('app')
         },
         (err) => {
           this.setMessageContent('Oops! ' + err.message)

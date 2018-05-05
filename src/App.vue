@@ -1,13 +1,23 @@
 <template>
   <div id="app">
-    <h1>BadgerPal</h1>
+    <AppHeader></AppHeader>
     <router-view/>
   </div>
 </template>
 
 <script>
+import AppHeader from './components/AppHeader'
+
 export default {
-  name: 'App'
+  name: 'App',
+  data () {
+    return {
+
+    }
+  },
+  components: {
+    AppHeader
+  }
 }
 </script>
 
@@ -16,6 +26,8 @@ $green: #8AC396;
 
 body, html {
   font-size: 18px;
+  padding:0;
+  margin:0;
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -23,7 +35,6 @@ body, html {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 
 button {
