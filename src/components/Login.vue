@@ -26,6 +26,7 @@
     methods: {
       setMessageContent(content) {
         this.message = content
+        console.log(content);
       },
       submitLogin() {
         firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(() => {
@@ -34,6 +35,8 @@
         },
         (err) => {
           this.setMessageContent('Oops! ' + err.message)
+        }).catch((error) => {
+          this.setMessageContent(`An error occured during the login process.`)
         })
       }
     }
