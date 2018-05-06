@@ -10,7 +10,7 @@ import firebase from 'firebase'
 Vue.use(Router)
 
 let router = new Router({
-  mode: 'history',
+  // mode: 'history',
   routes: [
     {
       path: '/',
@@ -48,20 +48,12 @@ let router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.auth)) {
-    firebase.auth().onAuthStateChanged(user => {
-      if (!user) {
-        next({
-          path: '/login'
-        })
-      } else {
-        next()
-      }
-    })
-  }
-  else {
-    next()
-  }
+  let currentUser = firebase.auth().currentUser;
+  let requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+
+  if (requiresAuth && !currentUser) next('login')
+  else next()
 })
+
 
 export default router

@@ -1,9 +1,16 @@
 <template>
   <div class="header">
-    <div class="logo">BadgerPal</div>
-    <ul>
-      <li><div v-on:click="signOut">Sign Out</div></li>
-    </ul>
+    <div class="header-section">
+      <div class="logo">BadgerPal</div>
+    </div>
+    <div class="header-section fill-space">
+
+    </div>
+    <div class="header-section">
+      <div v-on:click="logout" v-if="loggedin">Logout</div>
+      <div v-else><router-link to="login">Login</router-link></div>
+
+    </div>
   </div>
 </template>
 
@@ -13,14 +20,21 @@ import firebase from 'firebase'
 export default {
   data () {
     return {
+      loggedin: false
     }
   },
   methods: {
-    signOut() {
+    logout() {
       firebase.auth().signOut().then(() => {
         this.$router.replace('login')
+      },
+      err => {
+        console.log(err.message);
       })
     }
+  },
+  watchers: {
+
   }
 }
 </script>
@@ -37,22 +51,8 @@ export default {
     justify-self: flex-end;
   }
 }
+
 .logo {
   font-weight: 600;
-}
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  margin:0;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
 }
 </style>

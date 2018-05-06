@@ -49,11 +49,5 @@
 .login {
   text-align:center;
 }
-input {
-  padding: 1rem;
-  margin: 1rem;
-  width:20%;
-  font-size: 1rem;
-}
 
 </style>

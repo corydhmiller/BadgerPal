@@ -12,7 +12,7 @@ export default {
   name: 'App',
   data () {
     return {
-
+      loggedin: false
     }
   },
   components: {
@@ -36,7 +36,27 @@ body, html {
   text-align: center;
   color: #2c3e50;
 }
-
+h1, h2 {
+  font-weight: normal;
+}
+ul {
+  list-style-type: none;
+  margin:0;
+  padding: 0;
+}
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+a {
+  color: #42b983;
+}
+input {
+  padding: 1rem;
+  margin: 1rem;
+  width:20%;
+  font-size: 1rem;
+}
 button {
   width:20%;
   background: $green;
@@ -49,5 +69,9 @@ button {
   font-size: 1rem;
   box-shadow: 3px 3px 0 0 darken($green, 10%)
 }
-
+.fill-space {
+    -webkit-flex: 3;
+    -ms-flex: 3;
+    flex: 3;
+}
 </style>
