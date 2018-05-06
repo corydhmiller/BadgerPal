@@ -12,7 +12,7 @@
 </template>
 
 <script>
-  import firebase from 'firebase'
+  import Firebase from 'firebase'
 
   export default {
     name: 'login',
@@ -29,8 +29,9 @@
         console.log(content);
       },
       submitLogin() {
-        firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(() => {
+        Firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(() => {
           this.setMessageContent('You have successfully logged in.')
+          this.$store.dispatch('setUser');
           this.$router.replace('app')
         },
         (err) => {

@@ -1,23 +1,30 @@
 import Vue from 'vue'
-import firebase from 'firebase'
-import firebaseConfig from './assets/firebaseConfig'
+import Vuex from 'vuex'
+import Firebase from 'firebase'
+import FirebaseConfig from './assets/firebaseConfig'
+import { store } from './store/store';
 
 import App from './App'
 import router from './router'
 
+Vue.use(Vuex)
 Vue.config.productionTip = false
 
+Firebase.initializeApp(FirebaseConfig);
+
 let app;
-firebase.initializeApp(firebaseConfig);
-firebase.auth().onAuthStateChanged(() => {
+
+Firebase.auth().onAuthStateChanged(() => {
   if (!app) {
     app = new Vue({
       el: '#app',
+      store: store,
       router,
       components: {
         App
       },
-      template: '<App/>'
+      template: '<App/>',
+      render: h => h(App)
     })
   }
 })

@@ -12,7 +12,7 @@
 </template>
 
 <script>
-  import firebase from 'firebase'
+  import Firebase from 'firebase'
 
   export default {
     name: 'Register',
@@ -29,7 +29,7 @@
         this.message = content;
       },
       submitRegistration() {
-        firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(() => {
+        Firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(() => {
           this.setMessageContent('Account created.');
         },
         (err) => {

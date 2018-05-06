@@ -9,8 +9,8 @@ import firebase from 'firebase'
 
 Vue.use(Router)
 
-let router = new Router({
-  // mode: 'history',
+const router = new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -48,8 +48,8 @@ let router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  let currentUser = firebase.auth().currentUser;
-  let requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+  const currentUser = firebase.auth().currentUser;
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
 
   if (requiresAuth && !currentUser) next('login')
   else next()

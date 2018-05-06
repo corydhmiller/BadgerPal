@@ -17,6 +17,14 @@ export default {
   },
   components: {
     AppHeader
+  },
+  methods: {
+    setUser: function() {
+      this.$store.dispatch('setUser');
+    }
+  },
+  created() {
+    this.setUser();
   }
 }
 </script>
