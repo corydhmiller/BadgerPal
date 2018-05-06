@@ -18,17 +18,17 @@ const router = new Router({
     },
     {
       path: '/login',
-      name: 'Login',
+      name: 'login',
       component: Login
     },
     {
       path: '/register',
-      name: 'Register',
+      name: 'register',
       component: Register
     },
     {
       path: '/app',
-      name: 'Wrap',
+      name: 'app',
       component: Wrap,
       meta: {
         requiresAuth: true
