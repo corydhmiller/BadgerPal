@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import Wrap from '@/components/Wrap'
 import Login from '@/components/Login'
 import Register from '@/components/Register'
+import PageNotFound from '@/components/PageNotFound'
 import firebase from 'firebase'
 
 Vue.use(Router)
@@ -12,12 +13,8 @@ let router = new Router({
   mode: 'history',
   routes: [
     {
-      path: '*',
-      redirect: '/login'
-    },
-    {
       path: '/',
-      redirect: '/login'
+      redirect: '/app'
     },
     {
       path: '/login',
@@ -37,17 +34,34 @@ let router = new Router({
         requiresAuth: true
       }
     },
+    {
+      path: '/pagenotfound',
+      name: 'Page Not Found',
+      component: PageNotFound
 
+    },
+    {
+      path: '*',
+      redirect: '/pagenotfound',
+    }
   ]
 })
 
 router.beforeEach((to, from, next) => {
-  let currentUser = firebase.auth().currentUser;
-  let requiresAuth = to.matched.some(record => record.meta.requiresAuth);
-
-  if (requiresAuth && !currentUser) next('login')
-  else if (!requiresAuth && currentUser) next('app')
-  else next()
+  if (to.matched.some(record => record.meta.auth)) {
+    firebase.auth().onAuthStateChanged(user => {
+      if (!user) {
+        next({
+          path: '/login'
+        })
+      } else {
+        next()
+      }
+    })
+  }
+  else {
+    next()
+  }
 })
 
 export default router

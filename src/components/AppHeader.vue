@@ -2,15 +2,24 @@
   <div class="header">
     <div class="logo">BadgerPal</div>
     <ul>
-      <li>Sign Out</li>
+      <li><div v-on:click="signOut">Sign Out</div></li>
     </ul>
   </div>
 </template>
 
 <script>
+import firebase from 'firebase'
+
 export default {
   data () {
     return {
+    }
+  },
+  methods: {
+    signOut() {
+      firebase.auth().signOut().then(() => {
+        this.$router.replace('login')
+      })
     }
   }
 }
