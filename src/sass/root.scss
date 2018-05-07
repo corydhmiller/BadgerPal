@@ -29,30 +29,6 @@ li {
   margin: 0 10px;
 }
 
-a {
-  color: #42b983;
-}
-
-input {
-  padding: 1rem;
-  margin: 1rem;
-  width: 20%;
-  font-size: 1rem;
-}
-
-button {
-  width: 20%;
-  background: $green;
-  color: #f9f9f9;
-  padding: 1rem;
-  margin: 1rem;
-  font-weight: 600;
-  border: none;
-  border-radius: .2rem;
-  font-size: 1rem;
-  box-shadow: 3px 3px 0 0 darken($green, 10%)
-}
-
 .fill-space {
   -webkit-flex: 3;
   -ms-flex: 3;
