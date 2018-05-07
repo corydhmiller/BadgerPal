@@ -1,9 +1,9 @@
 <template>
   <div class="login">
-    <div class="flex flex--center">
+    <div class="flex flex--center flex--column">
       <h3>Sign In</h3>
       <div class="styled-input">
-        <input type="email" v-model="email" required />
+        <input type="text" v-model="email" required />
         <label>Email</label>
         <span></span>
       </div>
@@ -12,8 +12,8 @@
         <label>Password</label>
         <span></span>
       </div>
-      <button class="button button--green button--shadow" v-on:click="submitLogin">Login &raquo;</button>
-      <div class="message">{{message}}</div>
+      <button class="button button--green button--shadow" v-on:click="submitLogin">Login</button>
+      <div class="message message--error" v-if="showMessage">{{message}}</div>
       <p>Don't have an account yet?
         <router-link to="/register">Create an account</router-link>
       </p>
@@ -30,17 +30,18 @@
       return {
         email: '',
         password: '',
-        message: ''
+        message: '',
+        showMessage: false
       }
     },
     methods: {
       setMessageContent(content) {
         this.message = content
-        console.log(content);
+        this.showMessage = true
+        console.log(content)
       },
       submitLogin() {
         Firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(() => {
-            this.setMessageContent('You have successfully logged in.')
             this.$store.dispatch('setUser');
             this.$router.replace('app')
           },
@@ -49,6 +50,10 @@
           }).catch((error) => {
           this.setMessageContent(`An error occured during the login process.`)
         })
+      }
+    },
+    watchers: {
+      removeMessage() {
       }
     }
   }

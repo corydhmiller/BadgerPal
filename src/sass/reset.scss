@@ -1,18 +1,24 @@
 /*= Reset CSS
 ============= */
 
-html,
-body {
-  border: 0;
-  margin: 0;
+body,
+html {
+  font-family: 'Avenir',
+  Helvetica,
+  Arial,
+  sans-serif;
+
+  font-size: 18px;
   padding: 0;
+  margin: 0;
+  border:0;
 }
 
+
 body {
-  font: 14px "Lato", Arial, sans-serif;
   min-width: 100%;
   min-height: 100%;
-  color: #666;
+  color: $black;
 }
 
 .container {

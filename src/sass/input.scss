@@ -1,6 +1,4 @@
-// Effect Styles Start Here
 %label-movement {
-  // Move up, colorize and shrink
   font-size: 0.75em;
   color: $green;
   top: -2.25rem;
@@ -9,7 +7,6 @@
 
 .styled-input {
   float: left;
-  width: 33.3333%;
   margin: 2rem 0 1rem;
   position: relative;
   label {
