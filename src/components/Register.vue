@@ -3,6 +3,11 @@
     <div class="flex flex--center flex--column">
       <h3>Create Your Account</h3>
       <div class="input">
+        <input type="text" v-model="name" required />
+        <label>Name</label>
+        <span></span>
+      </div>
+      <div class="input">
         <input type="text" v-model="email" required />
         <label>Email</label>
         <span></span>
@@ -28,7 +33,7 @@
     name: 'Register',
     data() {
       return {
-        name: 'Preffy',
+        name: '',
         email: '',
         password: '',
         message: '',
@@ -49,6 +54,7 @@
         // This is a hack to sort out the issue described here:
         // https://github.com/firebase/firebase-js-sdk/issues/311
         const data = JSON.parse(JSON.stringify(user))
+        data.name = this.name
         db.collection('users').doc(data.uid).set(data)
 
       },

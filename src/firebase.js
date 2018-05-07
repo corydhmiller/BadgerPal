@@ -4,4 +4,10 @@ import FirebaseConfig from './assets/firebaseConfig'
 
 const firebaseApp = Firebase.initializeApp(FirebaseConfig);
 
-export const db = firebaseApp.firestore()
+const db = firebaseApp.firestore()
+const settings = {timestampsInSnapshots: true}
+db.settings(settings)
+
+export {
+  db
+}
