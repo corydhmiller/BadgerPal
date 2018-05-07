@@ -2,9 +2,9 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import Firebase from 'firebase'
 import FirebaseConfig from './assets/firebaseConfig'
-import { store } from './store/store';
-
 import App from './App'
+
+import { store } from './store/store';
 import router from './router/routes'
 
 Vue.use(Vuex)
