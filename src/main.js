@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import VueFire from 'vuefire'
 import Firebase from 'firebase'
-
 import './firebase'
 
 import App from './App'

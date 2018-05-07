@@ -2,12 +2,12 @@
   <div class="login">
     <div class="flex flex--center flex--column">
       <h3>Sign In</h3>
-      <div class="styled-input">
+      <div class="input">
         <input type="text" v-model="email" required />
         <label>Email</label>
         <span></span>
       </div>
-      <div class="styled-input">
+      <div class="input">
         <input type="password" v-model="password" required />
         <label>Password</label>
         <span></span>
