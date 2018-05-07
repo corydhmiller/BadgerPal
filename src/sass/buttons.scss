@@ -1,3 +1,11 @@
+button {
+  cursor: pointer;
+  position:relative;
+  & > span {
+    z-index: 50;
+    position:relative;
+  }
+}
 .button {
   padding: 1rem;
   margin: 1rem;
@@ -5,12 +13,42 @@
   border: none;
   border-radius: .2rem;
   font-size: 1rem;
-}
-.button--green {
-  background: $green;
-  color: #f9f9f9;
-
-  &.button--shadow {
-    box-shadow: 3px 3px 0 0 $greenaccent
+  &:after {
+    content: '';
+    width: 0;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: .2rem;
+    z-index: 49;
+    transition: all 0.25s cubic-bezier(0.2, 0, 0.03, 1);
   }
+  &:hover {
+    &:after {
+      width:100%;
+    }
+  }
+  &--green {
+    background: $green;
+    color: $white;
+    &:after {
+      background: $greenaccent;
+
+    }
+    &.button--shadow {
+      box-shadow: 3px 3px 0 0 $greenaccent
+    }
+  }
+  &--yellow {
+    background: $yellow;
+    color: $white;
+    &:after {
+      background: $yellowaccent;
+    }
+    &.button--shadow {
+      box-shadow: 3px 3px 0 0 $yellowaccent
+    }
+  }
+
 }

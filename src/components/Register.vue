@@ -13,11 +13,13 @@
 
 <script>
   import Firebase from 'firebase'
+  import {namesRef} from '../firebase'
 
   export default {
     name: 'Register',
     data () {
       return {
+        name: 'Preffy',
         email: '',
         password: '',
         message: '',
@@ -25,11 +27,18 @@
       }
     },
     methods: {
+      setNameInDatabase() {
+        namesRef.push({name: this.name, edit: false})
+      },
       setMessageContent(content) {
         this.message = content;
       },
       submitRegistration() {
-        Firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(() => {
+        Firebase.database().ref('users/qprdu5i1u').set({
+          email: this.email,
+        });
+        Firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(user => {
+          Firebase.firestore().collection('users').doc(user.uid).set(user)
           this.setMessageContent('Account created.');
         },
         (err) => {

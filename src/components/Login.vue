@@ -12,7 +12,9 @@
         <label>Password</label>
         <span></span>
       </div>
-      <button class="button button--green button--shadow" v-on:click="submitLogin">Login</button>
+      <button class="button button--yellow" v-on:click="submitLogin">
+        <span>Login</span>
+      </button>
       <div class="message message--error" v-if="showMessage">{{message}}</div>
       <p>Don't have an account yet?
         <router-link to="/register">Create an account</router-link>
