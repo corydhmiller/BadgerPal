@@ -5,7 +5,7 @@ import FirebaseConfig from './assets/firebaseConfig'
 import { store } from './store/store';
 
 import App from './App'
-import router from './router'
+import router from './router/routes'
 
 Vue.use(Vuex)
 Vue.config.productionTip = false

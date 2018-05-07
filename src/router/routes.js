@@ -38,6 +38,10 @@ const router = new Router({
       path: '/pagenotfound',
       name: 'Page Not Found',
       component: PageNotFound
+    },
+    {
+      path: '*',
+      redirect: '/pagenotfound',
     }
   ]
 })
