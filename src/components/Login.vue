@@ -16,9 +16,9 @@
         <span>Login</span>
       </button>
       <div class="message message--error" v-if="showMessage">{{message}}</div>
-      <p>Don't have an account yet?
+      <!-- <p>Don't have an account yet?
         <router-link to="/register">Create an account</router-link>
-      </p>
+      </p> -->
     </div>
   </div>
 </template>

@@ -13,7 +13,6 @@ import App from './App'
 import { store } from './store/store'
 import router from './router/routes'
 
-
 let app;
 
 Firebase.auth().onAuthStateChanged(() => {
