@@ -1,17 +1,18 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import VueFire from 'vuefire'
+import VueFirestore from 'vue-firestore'
 import Firebase from 'firebase'
-import './firebase'
+
+Vue.config.productionTip = false
+
+Vue.use(Vuex)
+Vue.use(VueFirestore)
 
 import App from './App'
 
 import { store } from './store/store'
 import router from './router/routes'
 
-Vue.use(VueFire)
-Vue.use(Vuex)
-Vue.config.productionTip = false
 
 let app;
 

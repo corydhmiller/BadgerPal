@@ -2,6 +2,11 @@
   <div class="app-wrapper">
     <h2>Users</h2>
     <div>
+      <article v-for="(location, idx) in locations" :key="idx">
+        <h1>{{ location.name }}</h1>
+      </article>
+    </div>
+    <div>
       <ul>
         <li v-for="user of users" v-bind:key="user['.key']">{{user.name}}</li>
       </ul>
@@ -10,31 +15,22 @@
 </template>
 
 <script>
-import Firebase from 'firebase'
-import firestore from '@firebase/firestore'
 import {db} from '../firebase'
 
 export default {
   data () {
     return {
       users: [],
-      group: {},
-      loggedin: false
+      locations: []
     }
   },
-  methods: {
-    getUsers() {
-      db.collection('users').get().then(query => {
-        query.forEach(user => {
-          this.users.push(user.data())
-        })
-      })
+  firestore () {
+    return{
+      locations: db.collection('users')
     }
-  },
-  firebase: {
   },
   created() {
-    this.getUsers()
+
   }
 }
 </script>
