@@ -14,24 +14,21 @@
 </template>
 
 <script>
-import {db} from '../firebase'
+import { db } from '../firebase';
 
 export default {
-  data () {
-    return {
-      users: [],
-      locations: []
-    }
-  },
-  firestore () {
-    return{
-      users: db.collection('users')
-    }
-  },
-  created() {
-
-  }
-}
+	data() {
+		return {
+			users: [],
+			locations: []
+		};
+	},
+	firestore() {
+		return {
+			users: db.collection('users')
+		};
+	}
+};
 </script>
 
 

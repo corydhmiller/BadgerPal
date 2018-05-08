@@ -1,6 +1,6 @@
 %label-movement {
   font-size: 0.75em;
-  color: $green;
+  color: $greenaccent;
   top: -2.25rem;
   transition: all 0.5s cubic-bezier(0.2, 0, 0.03, 1);
 }
@@ -43,7 +43,7 @@ textarea {
     z-index: 49;
     &:after {
       width: 0;
-      background: $green;
+      background: $greenaccent;
       height: 100%;
       position: absolute;
       left: 0;

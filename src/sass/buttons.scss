@@ -50,5 +50,15 @@ button {
       box-shadow: 3px 3px 0 0 $yellowaccent
     }
   }
+  &--black {
+    background: $black;
+    color: $white;
+    &:after {
+      background: $green;
+    }
+    &.button--shadow {
+      box-shadow: 3px 3px 0 0 $grey
+    }
+  }
 
 }

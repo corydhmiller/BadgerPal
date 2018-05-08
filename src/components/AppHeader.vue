@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <div class="header-section">
-      <div class="logo">BadgerPal</div>
+      <div class="logo"></div>
     </div>
     <div class="header-section fill-space">
 
@@ -50,19 +50,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.header {
-  background:#333;
-  color:#fefefe;
-  display:flex;
-  flex-direction: row;
-  align-items: center;
-  padding: .5rem;
-  & ul {
-    justify-self: flex-end;
-  }
-}
 
-.logo {
-  font-weight: 600;
-}
 </style>

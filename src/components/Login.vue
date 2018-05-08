@@ -12,7 +12,7 @@
         <label>Password</label>
         <span></span>
       </div>
-      <button class="button button--yellow" v-on:click="submitLogin">
+      <button class="button button--black" v-on:click="submitLogin">
         <span>Login</span>
       </button>
       <div class="message message--error" v-if="showMessage">{{message}}</div>
