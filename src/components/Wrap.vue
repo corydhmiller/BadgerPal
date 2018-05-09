@@ -2,7 +2,7 @@
   <div class="app-wrapper">
     <h2>My User Info</h2>
     <div>
-      <div v-if="!usersLoaded">{{userLoadingText}}</div>
+      <div v-if="!userInfoLoaded">{{userLoadingText}}</div>
       <div>
           <ul>
             <li><strong>Name:</strong> {{user.name}}</li>
@@ -12,6 +12,11 @@
       </div>
     </div>
     <h2>My Groups</h2>
+		<div v-show="!userHasGroups"><p>You don't have any accountability groups set up yet. Would you like to start one?</p>
+		<button class="button button--black" v-on:click="createNewGroup">
+        <span>+ Add Group</span>
+      </button>
+			</div>
     <div>
       <div v-if="!groupsLoaded">{{groupLoadingText}}</div>
       <ul>
@@ -20,9 +25,6 @@
         </li>
       </ul>
     </div>
-    <button class="button button--black" v-on:click="createNewGroup">
-        <span>+ Add Group</span>
-      </button>
       <button class="button button--black" v-on:click="addUserToGroup">
         <span>Add User to Group</span>
       </button>
@@ -40,7 +42,8 @@ export default {
 			locations: [],
 			groups: [],
 			groupsLoaded: false,
-			usersLoaded: false,
+			userInfoLoaded: false,
+			userHasGroups: true,
 			groupLoadingText: 'Loading groups...',
 			userLoadingText: 'Loading user info...'
 		};
@@ -70,7 +73,7 @@ export default {
 			db
 				.collection('groups')
 				.doc(groupID)
-				.set({ [this.currentUserUID]: true });
+				.set({[this.currentUserUID]: true});
 		}
 	},
 	mounted() {
@@ -83,7 +86,7 @@ export default {
 			});
 		this.$binding('user', db.collection('users').doc(this.currentUserUID))
 			.then(() => {
-				this.usersLoaded = true;
+				this.userInfoLoaded = true;
 			})
 			.catch(err => {
 				console.error(err);
