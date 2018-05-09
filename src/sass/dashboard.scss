@@ -1,0 +1,8 @@
+.group-options {
+  & .option {
+    font-size: .85rem;
+    &:before {
+      content: '‣ '
+    }
+  }
+}

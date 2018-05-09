@@ -3,7 +3,7 @@
     <h2>My User Info</h2>
     <div>
       <div v-if="!userInfoLoaded">{{userLoadingText}}</div>
-      <div>
+      <div v-show="userInfoLoaded">
           <ul>
             <li><strong>Name:</strong> {{user.name}}</li>
             <li><strong>Email:</strong> {{user.email}}</li>
@@ -12,27 +12,37 @@
       </div>
     </div>
     <h2>My Groups</h2>
-		<div v-show="!userHasGroups"><p>You don't have any accountability groups set up yet. Would you like to start one?</p>
-		<button class="button button--black" v-on:click="createNewGroup">
-        <span>+ Add Group</span>
-      </button>
+		<div v-if="!groupsLoaded">{{groupLoadingText}}</div>
+		<div v-show="!userHasGroups && groupsLoaded">
+			<p>You don't have any accountability groups set up yet. Would you like to start one?</p>
+			<button class="button button--green" v-on:click="createNewGroup">
+				<span>Start Your First Group</span>
+				</button>
 			</div>
-    <div>
-      <div v-if="!groupsLoaded">{{groupLoadingText}}</div>
+    <div v-show="userHasGroups">
       <ul>
-        <li v-for="group of groups" v-bind:key="group['.key']">
-          <strong>{{group['.key']}}</strong>
+        <li v-for="group in orderedGroups" v-bind:key="group['.key']">
+          <div v-if="group.name"><strong>Group Name:</strong> {{group.name}}</div>
+					<div v-else>{{group['.key']}}</div>
+				  <div class="group-options">
+						<div class="option">Invite Friend</div>
+						<div class="option">Edit Group Name</div>
+						<div class="option"><a href="#" @click="leaveGroup(group['.key'])">Leave Group</a></div>
+					</div>
         </li>
       </ul>
+			<button class="button button--green" v-on:click="createNewGroup">
+				<span>Add a Group</span>
+				</button>
     </div>
-      <button class="button button--black" v-on:click="addUserToGroup">
-        <span>Add User to Group</span>
-      </button>
   </div>
 </template>
 
 <script>
-import { db } from '../firebase';
+import totemize from 'totemize'
+import firebase from 'firebase'
+import _ from 'lodash'
+import { db } from '../firebase'
 
 export default {
 	data() {
@@ -43,56 +53,83 @@ export default {
 			groups: [],
 			groupsLoaded: false,
 			userInfoLoaded: false,
-			userHasGroups: true,
+			userHasGroups: false,
 			groupLoadingText: 'Loading groups...',
 			userLoadingText: 'Loading user info...'
-		};
+		}
 	},
 	firestore() {
-		return {};
+		return {}
+	},
+	watch: {
+		groups: function() {
+			this.userHasGroups = this.groups.length > 0
+		}
+	},
+	computed: {
+		orderedGroups: function() {
+			function compare(a, b) {
+				if (a.createdAt < b.createdAt)
+					return -1;
+				if (a.createdAt > b.createdAt)
+					return 1;
+				return 0;
+			}
+			return this.groups.sort(compare)
+		}
 	},
 	methods: {
 		createNewGroup() {
+			const groupName = totemize()
 			db
 				.collection('groups')
 				.add({})
 				.then(newGroup => {
-					console.log(newGroup.id);
 					db
 						.collection('groups')
 						.doc(newGroup.id)
 						.set(
 							{
-								[this.currentUserUID]: true
+								name: groupName,
+								[this.currentUserUID]: true,
+								createdAt: Date.now()
 							},
 							{ merge: true }
-						);
-				});
+						)
+				})
 		},
 		addUserToGroup(groupID) {
 			db
 				.collection('groups')
 				.doc(groupID)
-				.set({[this.currentUserUID]: true});
+				.set({ [this.currentUserUID]: true })
+		},
+		leaveGroup(groupID) {
+			db
+				.collection('groups')
+				.doc(groupID)
+				.update({
+					[this.currentUserUID]: firebase.firestore.FieldValue.delete()
+				})
 		}
 	},
 	mounted() {
 		this.$binding('groups', db.collection('groups').where(this.currentUserUID, '==', true))
-			.then(() => {
-				this.groupsLoaded = true;
+			.then(data => {
+				this.groupsLoaded = true
 			})
 			.catch(err => {
-				console.error(err);
-			});
+				console.error(err)
+			})
 		this.$binding('user', db.collection('users').doc(this.currentUserUID))
 			.then(() => {
-				this.userInfoLoaded = true;
+				this.userInfoLoaded = true
 			})
 			.catch(err => {
-				console.error(err);
-			});
+				console.error(err)
+			})
 	}
-};
+}
 </script>
 
 
