@@ -1,15 +1,15 @@
 <template>
   <div class="app-wrapper">
-    <h2>Users</h2>
+    <h2>My User Info</h2>
     <div>
       <div v-if="!usersLoaded">{{userLoadingText}}</div>
-      <ul>
-        <li v-for="user of users" v-bind:key="user['.key']">
-          <strong>{{user.name}}</strong><br />{{user.email}}
-          <br />
-          {{user.uid}}
-        </li>
-      </ul>
+      <div>
+          <ul>
+            <li><strong>Name:</strong> {{user.name}}</li>
+            <li><strong>Email:</strong> {{user.email}}</li>
+            <li><strong>User id:</strong> {{user.uid}}</li>
+          </ul>
+      </div>
     </div>
     <h2>My Groups</h2>
     <div>
@@ -36,13 +36,13 @@ export default {
 	data() {
 		return {
 			currentUserUID: this.$store.getters.getUser.uid,
-			users: [],
+			user: '',
 			locations: [],
 			groups: [],
 			groupsLoaded: false,
 			usersLoaded: false,
 			groupLoadingText: 'Loading groups...',
-			userLoadingText: 'Loading users...'
+			userLoadingText: 'Loading user info...'
 		};
 	},
 	firestore() {
@@ -81,7 +81,7 @@ export default {
 			.catch(err => {
 				console.error(err);
 			});
-		this.$binding('users', db.collection('users'))
+		this.$binding('user', db.collection('users').doc(this.currentUserUID))
 			.then(() => {
 				this.usersLoaded = true;
 			})
