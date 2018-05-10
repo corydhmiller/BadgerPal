@@ -39,10 +39,9 @@
 </template>
 
 <script>
-import totemize from 'totemize'
-import firebase from 'firebase'
-import _ from 'lodash'
-import { db } from '../firebase'
+import totemize from 'totemize';
+import firebase from 'firebase';
+import { db } from '../firebase';
 
 export default {
 	data() {
@@ -56,31 +55,29 @@ export default {
 			userHasGroups: false,
 			groupLoadingText: 'Loading groups...',
 			userLoadingText: 'Loading user info...'
-		}
+		};
 	},
 	firestore() {
-		return {}
+		return {};
 	},
 	watch: {
 		groups: function() {
-			this.userHasGroups = this.groups.length > 0
+			this.userHasGroups = this.groups.length > 0;
 		}
 	},
 	computed: {
 		orderedGroups: function() {
 			function compare(a, b) {
-				if (a.createdAt < b.createdAt)
-					return -1;
-				if (a.createdAt > b.createdAt)
-					return 1;
+				if (a.createdAt < b.createdAt) return -1;
+				if (a.createdAt > b.createdAt) return 1;
 				return 0;
 			}
-			return this.groups.sort(compare)
+			return this.groups.sort(compare);
 		}
 	},
 	methods: {
 		createNewGroup() {
-			const groupName = totemize()
+			const groupName = totemize();
 			db
 				.collection('groups')
 				.add({})
@@ -95,14 +92,20 @@ export default {
 								createdAt: Date.now()
 							},
 							{ merge: true }
-						)
+						);
 				})
+				.catch(err => {
+					console.log(err.message);
+				});
 		},
 		addUserToGroup(groupID) {
 			db
 				.collection('groups')
 				.doc(groupID)
 				.set({ [this.currentUserUID]: true })
+				.catch(err => {
+					console.log(err.message);
+				});
 		},
 		leaveGroup(groupID) {
 			db
@@ -111,25 +114,28 @@ export default {
 				.update({
 					[this.currentUserUID]: firebase.firestore.FieldValue.delete()
 				})
+				.catch(err => {
+					console.log(err.message);
+				});
 		}
 	},
 	mounted() {
 		this.$binding('groups', db.collection('groups').where(this.currentUserUID, '==', true))
 			.then(data => {
-				this.groupsLoaded = true
+				this.groupsLoaded = true;
 			})
 			.catch(err => {
-				console.error(err)
-			})
+				console.error(err);
+			});
 		this.$binding('user', db.collection('users').doc(this.currentUserUID))
 			.then(() => {
-				this.userInfoLoaded = true
+				this.userInfoLoaded = true;
 			})
 			.catch(err => {
-				console.error(err)
-			})
+				console.error(err);
+			});
 	}
-}
+};
 </script>
 
 

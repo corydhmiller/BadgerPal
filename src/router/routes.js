@@ -6,6 +6,7 @@ import Login from '@/components/Login'
 import Register from '@/components/Register'
 import PageNotFound from '@/components/PageNotFound'
 import firebase from 'firebase'
+import Nprogress from 'nprogress'
 
 Vue.use(Router)
 
@@ -49,10 +50,16 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   const currentUser = firebase.auth().currentUser;
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
-
+  if (to.name) {
+    Nprogress.start()
+  }
   if (requiresAuth && !currentUser) next('login')
   else next()
 })
 
+router.afterEach((to, from) => {
+  // Complete the animation of the route progress bar.
+  Nprogress.done()
+})
 
 export default router
