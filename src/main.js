@@ -2,13 +2,12 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import VueFirestore from 'vue-firestore'
 import Firebase from 'firebase'
-import VueLodash from 'vue-lodash'
+import _ from 'lodash'
 
 Vue.config.productionTip = false
 
 Vue.use(Vuex)
 Vue.use(VueFirestore)
-Vue.use(VueLodash)
 
 import App from './App'
 
@@ -23,6 +22,7 @@ Firebase.auth().onAuthStateChanged(() => {
       el: '#app',
       store: store,
       router,
+      _,
       components: {
         App
       },
