@@ -29,8 +29,12 @@
 						<strong>Group Name:</strong> {{group.name}}</div>
 					<div v-else>{{group['.key']}}</div>
 					<div class="group-options">
-						<div class="option">Invite Friend</div>
-						<div class="option">Edit Group Name</div>
+						<div class="option">
+							<a href="#" @click="inviteFriend(group['.key'])">Invite Friend</a>
+							</div>
+						<div class="option">
+							<a href="#" @click="editGroupName(group['.key'])">Edit Group Name</a>
+							</div>
 						<div class="option">
 							<a href="#" @click="leaveGroup(group['.key'])">Leave Group</a>
 						</div>
