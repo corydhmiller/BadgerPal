@@ -1,0 +1,14 @@
+@import url("https://use.typekit.net/ytz8ony.css");
+
+$font--primary: "aktiv-grotesk",sans-serif;
+$font--secondary: "brandon-grotesque",sans-serif;
+
+body, html {
+  font-family: $font--primary;
+  font-size: 18px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font--secondary;
+  font-weight: bold;
+}

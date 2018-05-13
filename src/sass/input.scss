@@ -10,7 +10,7 @@
   margin: 2rem 0 1rem;
   position: relative;
   label {
-    color: $black;
+    color: $grey;
     padding: 1rem;
     position: absolute;
     top: 0;
@@ -26,6 +26,7 @@
 
 input,
 textarea {
+  background:inherit;
   padding: 1rem 1rem;
   border: 0;
   width: 100%;
