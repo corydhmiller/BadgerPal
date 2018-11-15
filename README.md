@@ -1,6 +1,8 @@
 # badgerpal
 
 > An accountability project using Vue.js and Firebase
+>
+> This project was primarily a test to connect Vue.js with Firebase. It is incomplete because it was a little side project, but the guts of it are there, including authentication and real-time database interaction.
 
 ## Build Setup
 
