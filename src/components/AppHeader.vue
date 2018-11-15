@@ -27,7 +27,7 @@ export default {
   },
   computed: {
     user() {
-      return this.$store.getters.getUser;
+      return this.$store.getters.getUser
     }
   },
   methods: {
@@ -36,10 +36,10 @@ export default {
       .signOut()
       .then(() => {
         this.$router.replace('login')
-        this.$store.dispatch('setUser');
+        this.$store.dispatch('setUser')
       },
       err => {
-        console.log(err.message);
+        console.log(err.message)
       })
     }
   },
